@@ -14,7 +14,7 @@
         "outputPath": "/Users/esandberg/Projects/Assignment10/Assignment10/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/esandberg/.nuget/NuGet/NuGet.Config"
+          "/Users/esandberg/.config/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"

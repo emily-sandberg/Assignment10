@@ -6,21 +6,26 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Assignment10.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Assignment10.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private BowlingLeagueContext context { get; set; }
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, BowlingLeagueContext ctx)
         {
             _logger = logger;
+            context = ctx;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(long? teamid)
         {
-            return View();
+            return View(context.Bowlers
+                .FromSqlInterpolated($"SELECT * FROM Bowlers WHERE TeamId = {teamid} OR {teamid} IS NULL")
+                .ToList());
         }
 
         public IActionResult Privacy()

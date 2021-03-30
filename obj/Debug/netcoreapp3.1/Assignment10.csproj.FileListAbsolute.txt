@@ -74,3 +74,4 @@
 /Users/esandberg/Projects/Assignment10/Assignment10/obj/Debug/netcoreapp3.1/Assignment10.dll
 /Users/esandberg/Projects/Assignment10/Assignment10/obj/Debug/netcoreapp3.1/Assignment10.pdb
 /Users/esandberg/Projects/Assignment10/Assignment10/obj/Debug/netcoreapp3.1/Assignment10.genruntimeconfig.cache
+/Users/esandberg/Projects/Assignment10/Assignment10/obj/Debug/netcoreapp3.1/Razor/Views/Shared/Components/Team/Default.cshtml.g.cs
