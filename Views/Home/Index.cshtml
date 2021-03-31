@@ -4,11 +4,17 @@
 
 @model IndexViewModel
 
+<h2>@Model.TeamName</h2>
+<br />
+<br />
+
 @foreach (var x in Model.Bowler)
 {
     <p>@x.BowlerFirstName @x.BowlerMiddleInit @x.BowlerLastName</p>
 }
 
-<div page-info="@Model.PageNumberingInfo" page-url-team="@Model.TeamName">
+<!-- Builds page navigation menu at bottom -->
+<div page-info="@Model.PageNumberingInfo" page-classes-enabled="true" page-class="btn" page-class-normal="btn-outline-dark"
+     page-class-selected="btn-primary" page-url-team="@Model.TeamName" class="btn-group pull-right m-1">
 
 </div>

@@ -21,16 +21,21 @@ namespace Assignment10.Infrastructure
             urlInfo = uhf;
         }
 
+        [ViewContext]
+        [HtmlAttributeNotBound]
+        public ViewContext ViewContext { get; set; }
         public PageNumberingInfo PageInfo { get; set; }
 
         // Our own dictionary (key value pairs) that we are creating
         [HtmlAttributeName(DictionaryAttributePrefix = "page-url-")]
         public Dictionary<string, object> KeyValuePairs { get; set; } = new Dictionary<string, object>();
 
-        [HtmlAttributeNotBound]
-        [ViewContext]
-        public ViewContext ViewContext { get; set; }
+        public bool PageClassesEnabled { get; set; } = false;
+        public string PageClass { get; set; }
+        public string PageClassNormal { get; set; }
+        public string PageClassSelected { get; set; }
 
+        //Override process method
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             IUrlHelper urlHelp = urlInfo.GetUrlHelper(ViewContext);
@@ -43,6 +48,13 @@ namespace Assignment10.Infrastructure
 
                 KeyValuePairs["pageNum"] = i;
                 individualTag.Attributes["href"] = urlHelp.Action("Index", KeyValuePairs);
+
+                if (PageClassesEnabled)
+                {
+                    individualTag.AddCssClass(PageClass);
+                    individualTag.AddCssClass(i == PageInfo.CurrentPage ? PageClassSelected : PageClassNormal);
+                }
+
                 individualTag.InnerHtml.Append(i.ToString());
 
                 finishedTag.InnerHtml.AppendHtml(individualTag);
@@ -52,4 +64,3 @@ namespace Assignment10.Infrastructure
         }
     }
 }
-
