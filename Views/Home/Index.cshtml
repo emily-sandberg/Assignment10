@@ -4,13 +4,19 @@
 
 @model IndexViewModel
 
-<h2>@Model.TeamName</h2>
 <br />
+<h2 class="text-center">@Model.TeamName</h2>
 <br />
 
 @foreach (var x in Model.Bowler)
 {
-    <p>@x.BowlerFirstName @x.BowlerMiddleInit @x.BowlerLastName</p>
+    <div class ="card card-outline-primary m-1 p-1 card bg-light mb-3">
+        <p>@x.BowlerFirstName @x.BowlerMiddleInit @x.BowlerLastName</p>
+        <div class="text-muted">
+            <p>@x.BowlerAddress, @x.BowlerCity, @x.BowlerState @x.BowlerZip</p>
+            <p>@x.BowlerPhoneNumber</p>
+        </div>
+     </div>
 }
 
 <!-- Builds page navigation menu at bottom -->

@@ -18,6 +18,7 @@ namespace Assignment10.Components
 
         public IViewComponentResult Invoke()
         {
+            ViewBag.SelectedTeam = RouteData?.Values["team"]; 
 
             return View(context.Teams
                 .Distinct()
