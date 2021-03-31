@@ -2,9 +2,13 @@
     ViewData["Title"] = "Home Page";
 }
 
-@model IEnumerable<Bowler>
+@model IndexViewModel
 
-@foreach (var x in Model)
+@foreach (var x in Model.Bowler)
 {
     <p>@x.BowlerFirstName @x.BowlerMiddleInit @x.BowlerLastName</p>
 }
+
+<div page-info="@Model.PageNumberingInfo" page-url-team="@Model.TeamName">
+
+</div>

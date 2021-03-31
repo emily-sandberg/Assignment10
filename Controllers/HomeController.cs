@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Assignment10.Models;
 using Microsoft.EntityFrameworkCore;
+using Assignment10.Models.ViewModels;
 
 namespace Assignment10.Controllers
 {
@@ -21,11 +22,34 @@ namespace Assignment10.Controllers
             context = ctx;
         }
 
-        public IActionResult Index(long? teamid)
+        public IActionResult Index(long? teamid, string team, int pageNum = 0)
         {
-            return View(context.Bowlers
-                .FromSqlInterpolated($"SELECT * FROM Bowlers WHERE TeamId = {teamid} OR {teamid} IS NULL")
-                .ToList());
+            int pageSize = 5;
+
+            return View(new IndexViewModel
+
+            {
+                Bowler = (context.Bowlers
+                    .Where(m => m.TeamId == teamid || teamid == null)
+                    .OrderBy(m => m.Team)
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList()),
+
+                PageNumberingInfo = new PageNumberingInfo
+                {
+                    NumItemsPerPage = pageSize,
+                    CurrentPage = pageNum,
+
+                    // if no bowler has been selected, then get the full count; otherwise, only count the number from the team that has been selected
+                    TotalNumItems = (teamid == null ? context.Bowlers.Count() :
+                        context.Bowlers.Where(x => x.TeamId == teamid).Count())
+                },
+
+                TeamName = team
+            });
+
+
         }
 
         public IActionResult Privacy()
